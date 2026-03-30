@@ -154,6 +154,11 @@ public class StudentForm extends javax.swing.JFrame {
         });
 
         btn_eliminar.setText("ELIMINAR");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
         btn_modificar.setText("MODIFICAR");
 
@@ -195,7 +200,7 @@ public class StudentForm extends javax.swing.JFrame {
                         .addComponent(btn_agregar)
                         .addGap(45, 45, 45)
                         .addComponent(btn_modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addComponent(btn_eliminar)
                         .addGap(55, 55, 55)
                         .addComponent(btn_listar)
@@ -297,6 +302,14 @@ public class StudentForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         limpiarFormulario();
     }//GEN-LAST:event_btn_limpiarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        StudentService service = new StudentService();        
+        String message = service.removeStudent(tf_code.getText());        
+        JOptionPane.showMessageDialog(this, message);
+        refreshTable();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments

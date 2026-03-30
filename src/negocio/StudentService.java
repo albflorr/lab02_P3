@@ -30,8 +30,12 @@ public class StudentService {
         return repository.findAll();
     }
     
-    public void removeStudent(String code){
+    public String removeStudent(String code){
+        if(code.isBlank())
+            return "ERROR: No es un código válido";
+        
         repository.delete(code);
+        return "El estudiante fue removido exitosamente";
     }    
     
 }
