@@ -36,6 +36,15 @@ public class StudentService {
         
         repository.delete(code);
         return "El estudiante fue removido exitosamente";
-    }    
+    }
+    
+    public String updateStudent(Student student){
+        if(student.getCode().isEmpty())
+            return "ERROR: El código es obligatorio";
+        
+        repository.update(student);
+        return "El estudiante ha sido "
+                + "modificado exitosamente";
+    }
     
 }
