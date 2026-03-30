@@ -5,6 +5,8 @@
 package presentacion;
 
 import dominio.Student;
+import infraestructura.IStudentRepository;
+import infraestructura.StudentRepositoryMySQL;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.StudentService;
@@ -43,7 +45,8 @@ public class StudentForm extends javax.swing.JFrame {
     }
     
     public void refreshTable(){
-        StudentService service = new StudentService();
+        IStudentRepository repository = new StudentRepositoryMySQL();
+        StudentService service = new StudentService(repository); 
         
         DefaultTableModel model 
                 = (DefaultTableModel)tbl_student.getModel();
@@ -292,7 +295,8 @@ public class StudentForm extends javax.swing.JFrame {
                 tf_email.getText()
         );
         
-        StudentService service = new StudentService();        
+        IStudentRepository repository = new StudentRepositoryMySQL();
+        StudentService service = new StudentService(repository);
         String message = service.registerStudent(student);        
         JOptionPane.showMessageDialog(this, message);
         refreshTable();
@@ -310,9 +314,10 @@ public class StudentForm extends javax.swing.JFrame {
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         // TODO add your handling code here:
-        StudentService service = new StudentService();        
-        String message = service.removeStudent(tf_code.getText());        
-        JOptionPane.showMessageDialog(this, message);
+        IStudentRepository repository = new StudentRepositoryMySQL();
+        StudentService service = new StudentService(repository);      
+        //String message = service.removeStudent(tf_code.getText());        
+        //JOptionPane.showMessageDialog(this, message);
         refreshTable();
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
@@ -326,9 +331,10 @@ public class StudentForm extends javax.swing.JFrame {
                 tf_email.getText()
         );
         
-        StudentService service = new StudentService();        
-        String message = service.updateStudent(student);        
-        JOptionPane.showMessageDialog(this, message);
+        IStudentRepository repository = new StudentRepositoryMySQL();
+        StudentService service = new StudentService(repository);       
+        //String message = service.updateStudent(student);        
+        //JOptionPane.showMessageDialog(this, message);
         refreshTable();
     }//GEN-LAST:event_btn_modificarActionPerformed
 

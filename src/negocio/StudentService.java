@@ -5,16 +5,30 @@
 package negocio;
 
 import dominio.Student;
-import infraestructura.StudentRepository;
+import infraestructura.IStudentRepository;
+//import infraestructura.StudentRepository;
 import java.util.List;
 
-/**
- *
- * @author HP
- */
 public class StudentService {
     
-    private StudentRepository repository 
+    private final IStudentRepository repository;
+    
+    // Inyección de dependencias
+    public StudentService(IStudentRepository repository) {
+        this.repository = repository;
+    }
+    
+    public String registerStudent(Student student) {
+        if (student.getName().isEmpty()) return "ERROR: El nombre es obligatorio";
+        repository.save(student);
+        return "El estudiante ha sido agregado a la Base de Datos";
+    }
+
+    public List<Student> getAllStudents() {
+        return repository.findAll();
+    }
+    
+    /*private StudentRepository repository 
             = new StudentRepository();
     
     public String registerStudent(Student student){
@@ -45,6 +59,5 @@ public class StudentService {
         repository.update(student);
         return "El estudiante ha sido "
                 + "modificado exitosamente";
-    }
-    
+    }*/    
 }
