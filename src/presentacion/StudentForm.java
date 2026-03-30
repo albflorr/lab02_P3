@@ -161,6 +161,11 @@ public class StudentForm extends javax.swing.JFrame {
         });
 
         btn_modificar.setText("MODIFICAR");
+        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificarActionPerformed(evt);
+            }
+        });
 
         btn_limpiar.setText("LIMPIAR");
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +315,22 @@ public class StudentForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, message);
         refreshTable();
     }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+        // TODO add your handling code here:
+        Student student = new Student(
+                tf_code.getText(),
+                tf_name.getText(),
+                tf_address.getText(),
+                tf_phone.getText(),
+                tf_email.getText()
+        );
+        
+        StudentService service = new StudentService();        
+        String message = service.updateStudent(student);        
+        JOptionPane.showMessageDialog(this, message);
+        refreshTable();
+    }//GEN-LAST:event_btn_modificarActionPerformed
 
     /**
      * @param args the command line arguments
